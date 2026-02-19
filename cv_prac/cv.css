@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+    line-height: 1.5;
+    color: black;
+}
+
+header{
+    border-bottom: 3px solid #8c0e70;
+    padding: 15px;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+.image{
+    float: left;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 20px;
+
+}
+
+h1{
+    color: #8c0e70;
+    font-size: 3em;
+}
+
+p.job{
+    color: #524e51;
+
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+
+h2{
+    color: #8c0e70;
+    border-bottom: 1.5px solid #8c0e70;
+    font-size: 1.5em;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+
+ .obj{
+    background-color: #f2dced;
+    padding: 15px;
+    border-left: 4px solid #8c0e70;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 3px; 
+    margin-left: 10px;
+ }
+
+.contact{
+    background-color: #f2dced;
+    padding: 15px;
+    border-left: 4px solid #8c0e70;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 3px; 
+    margin-left: 10px;
+}
+
+.edu{
+    background-color: #f2dced;
+            padding: 15px;
+            border-left: 4px solid #8c0e70;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            border-radius: 3px; 
+
+            position: relative;
+            left: 10px;
+}
+
+.skills{
+     background-color: #f2dced;
+            padding: 15px;
+            border-left: 4px solid #8c0e70;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            border-radius: 3px; 
+
+            position: relative;
+            left: 10px;
+}
+
+
+
+
