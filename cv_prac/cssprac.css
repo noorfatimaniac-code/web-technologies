@@ -1,0 +1,75 @@
+/* body{
+    background-image: url(images/download.jfif);
+    background-size: cover;
+}
+@keyframes color_change {
+    from{
+        color: #5A2971;
+    }
+    to{
+        color: aqua;
+    }
+}
+
+
+h1{
+    color: #5A2971;
+    text-align: center;
+    border: 5px solid cadetblue;
+    cursor: pointer;
+    animation-name: color_change;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+}
+
+li {
+    display: inline-block;
+}
+
+p{
+    text-decoration: underline;
+    font-style: italic;
+
+}
+
+
+@keyframes move_right {
+    0%{
+        left: 0px;
+    }
+
+    
+
+    
+    
+
+    100%{
+        left: 200px;
+    }
+}
+
+.img{
+    float: left;
+    position: relative;
+    animation-name: move_right;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+
+}
+
+footer{
+    clear: both;
+
+}
+
+.box{
+    display: inline-block;
+    border: 3px solid #5A2971;
+    padding: 20px;
+    margin-top: 30px;
+} */
+
+
+

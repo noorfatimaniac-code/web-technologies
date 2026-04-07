@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jewellery</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="resp.css" />
+    <link rel="stylesheet" href="menu.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+
+
+    <header class="navbar">
+
+      <div class="hamburger">
+  <i class="fa-solid fa-bars"></i>
+</div>
+
+      <div class="logo">
+        <p>Jewellery</p>
+      </div>
+
+      <nav class="navbtn">
+        <a href="#">ALL JEWELLERY</a>
+        <a href="#">GIFTS</a>
+        <a href="#">NEW IN</a>
+        <a href="#">BEST SELLERS</a>
+        <a href="#">COLLECTIONS</a>
+        <a href="#">MATERIALS</a>
+      </nav>
+
+
+
+      <div class="nav-right">
+    <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="#"><i class="fa-regular fa-heart"></i></a>
+    <a href="#"><i class="fa-regular fa-user"></i></a>
+</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-left">
+        <img src="images/stack.jpg" />
+
+        <div class="hero-text">
+          <h1>THE ART OF STACKING</h1>
+          <p>
+            Step inside our stacking studio and discover your new favorites.
+          </p>
+          <a href="#">STACKING GUIDE</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <img src="images/stack2.jpg" />
+      </div>
+    </section>
+
+    <section class="trending">
+      <h1>TOP TRENDING PRODUCTS</h1>
+
+      <div class="product-grid">
+        
+       
+      </div>
+    </section>
+
+
+
+
+
+    <section class="by-product">
+      <h1>SHOP BY PRODUCT</h1>
+
+      <div class="categories">
+        <!-- earrings -->
+        <div class="card">
+          <a href="#"><img src="images/by-prouct1.jpg" alt="" /></a>
+          <h2>EARRINGS</h2>
+          <p>For the self-aware, elegant, independent person</p>
+          <a href="#">DISCOVER</a>
+        </div>
+
+        <!-- rings -->
+        <div class="card">
+          <a href="#"><img src="images/by-product2.jpg" alt="" /></a>
+          <h2>RINGS</h2>
+          <p>A girl can never have too many rings</p>
+          <a href="#">DISCOVER</a>
+        </div>
+
+        <!-- necklaces -->
+        <div class="card">
+          <a href="#"><img src="images/by-product3.jpg" alt="" /></a>
+          <h2>NECKLACES</h2>
+          <p>Discover a perfect match to your style</p>
+          <a href="#">DISCOVER</a>
+        </div>
+
+        <!-- BRACELETS -->
+        <div class="card">
+          <a href="#"><img src="images/by-product4.jpg" alt="" /></a>
+
+          <div class="text">
+            <h2>BRACELETS</h2>
+            <p>Inspired by timeless architectural designs</p>
+            <a href="#">DISCOVER</a>
+          </div>
+        </div>
+
+        <!-- charms -->
+        <div class="card">
+          <a href="#"><img src="images/by-product5.jpg" alt="" /></a>
+          <h2>CHARMS</h2>
+          <p>Find unique, custom, handmade pieces</p>
+          <a href="#">DISCOVER</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+
+        <div class="col">
+          <h3>Help</h3>
+
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Order Status</a></li>
+            <li><a href="#">Shipping & Delivery</a></li>
+            <li><a href="#">Returns & Exchanges</a></li>
+            <li><a href="#">Warranty</a></li>
+            <li><a href="#">Gift Card</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Help Code</a></li>
+          </ul>
+        </div>
+
+ 
+        <div class="col">
+          <h3>Stores & Services</h3>
+
+          <ul>
+            <li><a href="#">Our Stores</a></li>
+            <li><a href="#">Piercing Services Near You</a></li>
+            <li><a href="#">Piercing Aftercare</a></li>
+            <li><a href="#">Piercing Studio Locations</a></li>
+            <li><a href="#">Corporate Events & Gifting</a></li>
+          </ul>
+        </div>
+
+      
+        <div class="col">
+          <h3>Resources</h3>
+
+          <ul>
+            <li><a href="#">Jewelry Care</a></li>
+            <li><a href="#">Ring Stacking Guide</a></li>
+            <li><a href="#">Size Guides</a></li>
+            <li><a href="#">How To Guide</a></li>
+            <li><a href="#">Blogs</a></li>
+            <li><a href="#">Mejuri + Terms & Conditions</a></li>
+            <li><a href="#">Mejuri Mobile App</a></li>
+            <li><a href="#">Our Materials</a></li>
+            <li><a href="#">Accessibility Statement</a></li>
+          </ul>
+        </div>
+
+     
+        <div class="col">
+          <h3>About Us</h3>
+
+          <ul>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Commitments</a></li>
+            <li><a href="#">Modern Slavery Policy</a></li>
+            <li><a href="#">Supplier Code Of Conduct</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+
+
+    <div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 id="modal-title"></h2>
+    <p id="modal-desc"></p>
+    <p id="modal-rating"></p>
+  </div>
+</div>
+
+
+
+
+
+    <script src="script.js"></script>
+
+  </body>
+</html>
