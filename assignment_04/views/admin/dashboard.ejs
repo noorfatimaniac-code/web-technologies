@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Jewellery</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body class="admin-body">
+
+<%- include('partials/sidebar', { activePage: 'dashboard' }) %>
+
+<main class="admin-main">
+
+  <!-- Top Bar -->
+  <div class="admin-topbar">
+    <h1 class="admin-page-title"><i class="fa-solid fa-gauge-high"></i> Dashboard</h1>
+    <a href="/admin/add" class="btn-admin-primary" id="add-product-btn">
+      <i class="fa-solid fa-plus"></i> Add Product
+    </a>
+  </div>
+
+  <!-- Alerts -->
+  <% if (success) { %>
+    <div class="admin-alert admin-alert-success">
+      <i class="fa-solid fa-circle-check"></i> <%= success %>
+    </div>
+  <% } %>
+  <% if (error) { %>
+    <div class="admin-alert admin-alert-error">
+      <i class="fa-solid fa-circle-exclamation"></i> <%= error %>
+    </div>
+  <% } %>
+
+  <!-- Stats Cards -->
+  <div class="admin-stats">
+    <div class="stat-card stat-total">
+      <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+      <div class="stat-info">
+        <p class="stat-value"><%= totalProducts %></p>
+        <p class="stat-label">Total Products</p>
+      </div>
+    </div>
+    <div class="stat-card stat-categories">
+      <div class="stat-icon"><i class="fa-solid fa-tags"></i></div>
+      <div class="stat-info">
+        <p class="stat-value"><%= totalCategories %></p>
+        <p class="stat-label">Categories</p>
+      </div>
+    </div>
+    <div class="stat-card stat-lowstock">
+      <div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="stat-info">
+        <p class="stat-value"><%= lowStock %></p>
+        <p class="stat-label">Low Stock</p>
+      </div>
+    </div>
+    <div class="stat-card stat-outofstock">
+      <div class="stat-icon"><i class="fa-solid fa-ban"></i></div>
+      <div class="stat-info">
+        <p class="stat-value"><%= outOfStock %></p>
+        <p class="stat-label">Out of Stock</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Table -->
+  <div class="admin-card">
+    <div class="admin-card-header">
+      <h2><i class="fa-solid fa-list"></i> All Products</h2>
+      <span class="badge"><%= totalProducts %> items</span>
+    </div>
+
+    <% if (products.length === 0) { %>
+      <div class="admin-empty">
+        <i class="fa-regular fa-gem"></i>
+        <p>No products yet. <a href="/admin/add">Add your first product</a>.</p>
+      </div>
+    <% } else { %>
+    <div class="table-wrapper">
+      <table class="admin-table" id="products-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price (PKR)</th>
+            <th>Rating</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(function(product) { %>
+          <tr id="row-<%= product._id %>">
+            <td>
+              <img src="<%= product.image %>" alt="<%= product.name %>"
+                   class="table-thumb" onerror="this.src='/images/pr1.jpg'" />
+            </td>
+            <td class="product-name-cell"><%= product.name %></td>
+            <td><span class="category-badge"><%= product.category %></span></td>
+            <td class="price-cell">PKR <%= product.price.toLocaleString('en-PK') %></td>
+            <td>⭐ <%= product.rating.toFixed(1) %></td>
+            <td>
+              <span class="stock-badge <%= product.stock === 0 ? 'out' : product.stock < 10 ? 'low' : 'ok' %>">
+                <%= product.stock %>
+              </span>
+            </td>
+            <td class="actions-cell">
+              <a href="/admin/edit/<%= product._id %>" class="btn-edit" id="edit-<%= product._id %>">
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+              </a>
+              <form action="/admin/delete/<%= product._id %>" method="POST"
+                    class="delete-form" id="delete-form-<%= product._id %>">
+                <button type="button" class="btn-delete"
+                        data-id="<%= product._id %>"
+                        data-name="<%= product.name %>"
+                        onclick="confirmDelete(this.dataset.id, this.dataset.name)">
+                  <i class="fa-solid fa-trash"></i> Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <% } %>
+  </div>
+</main>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <div class="modal-icon"><i class="fa-solid fa-trash"></i></div>
+    <h3>Delete Product?</h3>
+    <p>Are you sure you want to delete <strong id="deleteProductName"></strong>? This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal()" id="cancel-delete">Cancel</button>
+      <button class="btn-modal-confirm" onclick="submitDelete()" id="confirm-delete">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentDeleteId = null;
+
+  function confirmDelete(id, name) {
+    currentDeleteId = id;
+    document.getElementById('deleteProductName').textContent = name;
+    document.getElementById('deleteModal').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('deleteModal').classList.remove('active');
+    currentDeleteId = null;
+  }
+
+  function submitDelete() {
+    if (currentDeleteId) {
+      document.getElementById('delete-form-' + currentDeleteId).submit();
+    }
+  }
+
+  // Close modal on overlay click
+  document.getElementById('deleteModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Auto-dismiss alerts
+  setTimeout(() => {
+    document.querySelectorAll('.admin-alert').forEach(el => el.style.opacity = '0');
+  }, 4000);
+</script>
+
+</body>
+</html>

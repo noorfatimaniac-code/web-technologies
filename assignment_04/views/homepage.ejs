@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jewellery — Handcrafted Pakistani Jewellery</title>
+  <meta name="description" content="Discover handcrafted Pakistani jewellery — rings, necklaces, earrings, bangles, bracelets and pendants." />
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/resp.css" />
+  <link rel="stylesheet" href="/css/menu.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<!-- ── HERO ──────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-left">
+    <img src="/images/stack.jpg" alt="Stacked rings and jewellery" />
+    <div class="hero-text">
+      <h1>THE ART OF STACKING</h1>
+      <p>Step inside our stacking studio and discover your new favorites.</p>
+      <a href="/products">SHOP NOW</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="/images/stack2.jpg" alt="Gold jewellery collection" />
+  </div>
+</section>
+
+<!-- ── TRENDING PRODUCTS ──────────────────────── -->
+<section class="trending">
+  <h1>TOP TRENDING PRODUCTS</h1>
+  <div class="product-grid">
+    <div class="pr1">
+      <a href="/products?category=Bangles"><img src="/images/pr1.jpg" alt="Desi Gold Chunky Bangles" /></a>
+      <h2>DESI GOLD CHUNKY BANGLES</h2>
+      <p>PKR 2,000</p>
+    </div>
+    <div class="pr2">
+      <a href="/products?category=Rings"><img src="/images/pr2.jpg" alt="Gold Chunky Ring" /></a>
+      <h2>GOLD CHUNKY RING</h2>
+      <p>PKR 700</p>
+    </div>
+    <div class="pr3">
+      <a href="/products?category=Pendants"><img src="/images/pr3.jpg" alt="Gold Flower Pendant" /></a>
+      <h2>GOLD FLOWER PENDANT</h2>
+      <p>PKR 1,600</p>
+    </div>
+    <div class="pr4">
+      <a href="/products?category=Earrings"><img src="/images/pr4.jpg" alt="Gold Chunky Earrings" /></a>
+      <h2>GOLD CHUNKY EARRINGS</h2>
+      <p>PKR 2,499</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SHOP BY PRODUCT ────────────────────────── -->
+<section class="by-product">
+  <h1>SHOP BY PRODUCT</h1>
+  <div class="categories">
+
+    <div class="card">
+      <a href="/products?category=Earrings"><img src="/images/by-prouct1.jpg" alt="Earrings" /></a>
+      <h2>EARRINGS</h2>
+      <p>For the self-aware, elegant, independent person</p>
+      <a href="/products?category=Earrings">DISCOVER</a>
+    </div>
+
+    <div class="card">
+      <a href="/products?category=Rings"><img src="/images/by-product2.jpg" alt="Rings" /></a>
+      <h2>RINGS</h2>
+      <p>A girl can never have too many rings</p>
+      <a href="/products?category=Rings">DISCOVER</a>
+    </div>
+
+    <div class="card">
+      <a href="/products?category=Necklaces"><img src="/images/by-product3.jpg" alt="Necklaces" /></a>
+      <h2>NECKLACES</h2>
+      <p>Discover a perfect match to your style</p>
+      <a href="/products?category=Necklaces">DISCOVER</a>
+    </div>
+
+    <div class="card">
+      <a href="/products?category=Bracelets"><img src="/images/by-product4.jpg" alt="Bracelets" /></a>
+      <div class="text">
+        <h2>BRACELETS</h2>
+        <p>Inspired by timeless architectural designs</p>
+        <a href="/products?category=Bracelets">DISCOVER</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <a href="/products?category=Bangles"><img src="/images/by-product5.jpg" alt="Bangles" /></a>
+      <h2>BANGLES</h2>
+      <p>Find unique, custom, handmade pieces</p>
+      <a href="/products?category=Bangles">DISCOVER</a>
+    </div>
+
+  </div>
+</section>
+
+<%- include('partials/footer') %>

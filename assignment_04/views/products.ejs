@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Catalog — Jewellery</title>
+  <meta name="description" content="Browse our full jewellery catalog — rings, earrings, necklaces, bangles, bracelets and pendants." />
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/resp.css" />
+  <link rel="stylesheet" href="/css/menu.css" />
+  <link rel="stylesheet" href="/css/catalog.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<!-- ── CATALOG HEADER ──────────────────────────── -->
+<section class="catalog-header">
+  <h1>Our Catalog</h1>
+  <p>Discover handcrafted jewellery inspired by Pakistani heritage</p>
+</section>
+
+<!-- ── FILTER BAR ──────────────────────────────── -->
+<form class="filter-bar" method="GET" action="/products" id="filter-form">
+
+  <!-- Search -->
+  <div class="filter-group filter-search">
+    <label for="search"><i class="fa-solid fa-magnifying-glass"></i> Search</label>
+    <input type="text" id="search" name="search" placeholder="e.g. Jhumka, Kundan…" value="<%= search %>" />
+  </div>
+
+  <!-- Category -->
+  <div class="filter-group">
+    <label for="category"><i class="fa-solid fa-tag"></i> Category</label>
+    <select id="category" name="category">
+      <option value="">All Categories</option>
+      <% categories.forEach(function(cat) { %>
+        <option value="<%= cat %>" <%= category === cat ? 'selected' : '' %>><%= cat %></option>
+      <% }); %>
+    </select>
+  </div>
+
+  <!-- Price Range -->
+  <div class="filter-group-price">
+    <label><i class="fa-solid fa-tag"></i> Price Range (PKR)</label>
+    <div class="price-range">
+      <input type="number" name="minPrice" id="minPrice" placeholder="Min" value="<%= minPrice %>" min="0" />
+      <input type="number" name="maxPrice" id="maxPrice" placeholder="Max" value="<%= maxPrice %>" min="0" />
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="filter-actions">
+    <button type="submit" class="btn-apply" id="apply-filters">
+      <i class="fa-solid fa-filter"></i> Apply
+    </button>
+    <a href="/products" class="btn-clear" id="clear-filters">
+      <i class="fa-solid fa-xmark"></i> Clear
+    </a>
+  </div>
+</form>
+
+<!-- ── RESULTS COUNT ───────────────────────────── -->
+<p class="results-info">
+  Showing <strong><%= products.length %></strong> of <strong><%= totalProducts %></strong> products
+  <% if (search || category || minPrice || maxPrice) { %>
+    — <span class="active-filter-hint">filtered results</span>
+  <% } %>
+</p>
+
+<!-- ── PRODUCT GRID ────────────────────────────── -->
+<div class="catalog-grid">
+  <% if (products.length === 0) { %>
+    <div class="no-products">
+      <i class="fa-regular fa-gem"></i>
+      <h2>No products found</h2>
+      <p>Try adjusting your search or filters to find what you're looking for.</p>
+      <a href="/products">View All Products</a>
+    </div>
+  <% } else { %>
+    <% products.forEach(function(product) { %>
+      <div class="product-card">
+        <div class="product-card-image">
+          <img src="<%= product.image %>" alt="<%= product.name %>" loading="lazy" />
+        </div>
+        <div class="product-card-body">
+          <span class="product-card-category"><%= product.category %></span>
+          <h2 class="product-card-name"><%= product.name %></h2>
+          <p class="product-card-description"><%= product.description %></p>
+          <p class="product-card-price">PKR <%= product.price.toLocaleString('en-PK') %></p>
+          <div class="product-card-meta">
+            <span class="product-card-rating">
+              ⭐ <%= product.rating.toFixed(1) %>
+            </span>
+            <span class="product-card-stock <%= product.stock < 10 ? 'low-stock' : '' %>">
+              <% if (product.stock === 0) { %>
+                Out of stock
+              <% } else if (product.stock < 10) { %>
+                Only <%= product.stock %> left!
+              <% } else { %>
+                In stock
+              <% } %>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  <% } %>
+</div>
+
+<!-- ── PAGINATION ──────────────────────────────── -->
+<% if (totalPages > 1) { %>
+<%
+  function buildUrl(p) {
+    var params = new URLSearchParams();
+    if (search)   params.set('search',   search);
+    if (category) params.set('category', category);
+    if (minPrice) params.set('minPrice', minPrice);
+    if (maxPrice) params.set('maxPrice', maxPrice);
+    params.set('page', p);
+    return '/products?' + params.toString();
+  }
+%>
+<nav class="pagination" aria-label="Product pages">
+
+  <!-- Prev -->
+  <% if (currentPage > 1) { %>
+    <a href="<%= buildUrl(currentPage - 1) %>" id="prev-page" aria-label="Previous page">
+      <i class="fa-solid fa-chevron-left"></i> Prev
+    </a>
+  <% } else { %>
+    <span class="disabled"><i class="fa-solid fa-chevron-left"></i> Prev</span>
+  <% } %>
+
+  <!-- Page numbers -->
+  <% for (var i = 1; i <= totalPages; i++) { %>
+    <% if (i === currentPage) { %>
+      <span class="current-page"><%= i %></span>
+    <% } else { %>
+      <a href="<%= buildUrl(i) %>" id="page-<%= i %>"><%= i %></a>
+    <% } %>
+  <% } %>
+
+  <!-- Next -->
+  <% if (currentPage < totalPages) { %>
+    <a href="<%= buildUrl(currentPage + 1) %>" id="next-page" aria-label="Next page">
+      Next <i class="fa-solid fa-chevron-right"></i>
+    </a>
+  <% } else { %>
+    <span class="disabled">Next <i class="fa-solid fa-chevron-right"></i></span>
+  <% } %>
+
+</nav>
+<% } %>
+
+<%- include('partials/footer') %>
