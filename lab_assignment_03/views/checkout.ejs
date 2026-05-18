@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Jewellery</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/menu.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    .checkout-container {
+      max-width: 600px;
+      margin: 80px auto;
+      padding: 40px;
+      background: #FFF7FA;
+      border: 1px solid #F8C8DC;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(142, 90, 106, 0.1);
+    }
+    .checkout-container i { font-size: 50px; color: #8E5A6A; margin-bottom: 20px; }
+    .checkout-title { color: #8E5A6A; font-size: 28px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+    .checkout-text { color: #666; font-size: 16px; margin-bottom: 30px; }
+    .btn-shop {
+      background: #8E5A6A; color: white; padding: 12px 24px; border: none; border-radius: 6px; 
+      font-size: 15px; font-weight: bold; cursor: pointer; text-transform: uppercase; 
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-shop:hover { background: #6e4252; }
+  </style>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <%- include('partials/flash') %>
+
+  <div class="checkout-container">
+    <i class="fa-solid fa-lock"></i>
+    <h2 class="checkout-title">Secure Checkout</h2>
+    <p class="checkout-text">You have successfully accessed the protected checkout area, <strong><%= currentUser.name %></strong>!</p>
+    <a href="/products" class="btn-shop">Continue Shopping</a>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
