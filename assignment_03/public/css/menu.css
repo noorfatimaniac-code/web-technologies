@@ -1,0 +1,47 @@
+.hamburger {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.hamburger:hover {
+    color: #8E5A6A;   
+}
+
+
+/* responsiveness for tablet and phone */
+
+@media (max-width: 992px) {
+    .navbtn {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: #FADADD;
+  display: none;
+  flex-direction: column;
+  text-align: center;
+
+
+  max-height: 80vh;
+    overflow-y: auto;
+}
+
+.navbtn a {
+  display: block;
+  padding: 15px;
+  border-top: 1px solid #F8C8DC;
+}
+
+
+.hamburger {
+  display: block;
+}
+
+
+.navbtn.active {
+  display: flex;
+}
+}
+
+
