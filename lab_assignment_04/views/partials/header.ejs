@@ -1,0 +1,33 @@
+<header class="navbar">
+  <div class="hamburger">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <div class="logo">
+    <a href="/" style="text-decoration:none;color:inherit;">Jewellery</a>
+  </div>
+
+  <nav class="navbtn">
+    <a href="/products">ALL JEWELLERY</a>
+    <a href="/products?category=Rings">RINGS</a>
+    <a href="/products?category=Necklaces">NECKLACES</a>
+    <a href="/products?category=Earrings">EARRINGS</a>
+    <a href="/products?category=Bangles">BANGLES</a>
+    <a href="/products?category=Bracelets">BRACELETS</a>
+    <% if (currentUser && currentUser.role === 'admin') { %>
+      <a href="/admin" style="color: #8E5A6A; font-weight: bold;"><i class="fa-solid fa-lock"></i> ADMIN</a>
+    <% } %>
+  </nav>
+
+  <div class="nav-right" style="display: flex; gap: 15px; align-items: center;">
+    <% if (currentUser) { %>
+      <span style="font-size: 13px; font-weight: bold; color: #8E5A6A; margin-right: 10px;">Hi, <%= currentUser.name.split(' ')[0] %>!</span>
+      <a href="/checkout" title="Checkout"><i class="fa-solid fa-bag-shopping"></i></a>
+      <a href="/auth/logout" title="Logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    <% } else { %>
+      <a href="/checkout" title="Checkout"><i class="fa-solid fa-bag-shopping"></i></a>
+      <a href="/auth/login" title="Login" style="font-size: 13px; font-weight: bold; text-decoration: none; color: #111;">LOGIN</a>
+      <a href="/auth/register" title="Register" style="font-size: 13px; font-weight: bold; text-decoration: none; color: #111;">REGISTER</a>
+    <% } %>
+  </div>
+</header>
