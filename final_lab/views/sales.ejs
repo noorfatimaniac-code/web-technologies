@@ -1,0 +1,86 @@
+<!-- Using express-ejs-layouts, layout is defined in the route renderer. -->
+<div>
+  <h2><i class="fa-solid fa-chart-line"></i> Real-Time Sales Dashboard</h2>
+  <p>Live metrics updated every 10 seconds.</p>
+
+  <!-- Dashboard Cards -->
+  <div class="dashboard-cards">
+    <div class="card-stat">
+      <h3>Total Revenue</h3>
+      <div class="value" id="total-revenue">$<%= totalRevenue.toFixed(2) %></div>
+    </div>
+    
+    <div class="card-stat">
+      <h3>Total Orders</h3>
+      <div class="value" id="total-orders"><%= totalOrders %></div>
+    </div>
+    
+    <div class="card-stat">
+      <h3>Top Selling Product</h3>
+      <div class="value" id="top-product">
+        <%= topProduct ? topProduct.name : 'N/A' %> 
+        (<%= topProduct ? topProduct.totalSold : 0 %> sold)
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Orders Table -->
+  <h3>Recent Orders</h3>
+  <% if (recentOrders && recentOrders.length > 0) { %>
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% recentOrders.forEach(order => { %>
+          <tr>
+            <td>#<%= order._id.toString().substring(18, 24).toUpperCase() %></td>
+            <td><%= order.user ? order.user.name : 'Unknown User' %></td>
+            <td>$<%= order.totalAmount.toFixed(2) %></td>
+            <td>
+              <span class="status-badge status-<%= order.status %>">
+                <%= order.status %>
+              </span>
+            </td>
+            <td><%= new Date(order.createdAt).toLocaleDateString() %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>No recent orders found.</p>
+  <% } %>
+</div>
+
+<!-- jQuery Polling Script -->
+<script>
+$(document).ready(function () {
+  function fetchSalesData() {
+    $.ajax({
+      url: '/api/sales-data',
+      method: 'GET',
+      success: function (data) {
+        $('#total-revenue').text('$' + data.totalRevenue.toFixed(2));
+        $('#total-orders').text(data.totalOrders);
+        if (data.topProduct) {
+          $('#top-product').text(data.topProduct.name + ' (' + data.topProduct.totalSold + ' sold)');
+        } else {
+          $('#top-product').text('N/A (0 sold)');
+        }
+      },
+      error: function () {
+        console.log('Failed to fetch sales data');
+      }
+    });
+  }
+  
+  // Poll every 10 seconds
+  setInterval(fetchSalesData, 10000);
+});
+</script>
